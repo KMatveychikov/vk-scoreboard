@@ -51,8 +51,8 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public List<Task> getAllUncompletedTask(){
-        var user = authService.getCurrentUser();
+    public List<Task> getAllUncompletedTask(String userId){
+        var user = authService.getUserById(userId);
         List<Task> completedTasks = user.getCompletedTasks();
         return getAllTasks().stream().filter(task -> !completedTasks.contains(task)).toList();
     }

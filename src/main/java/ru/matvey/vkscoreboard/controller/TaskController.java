@@ -36,8 +36,8 @@ public class TaskController {
     }
 
     @GetMapping("/uncompleted")
-    private List<Task> getUncompletedTasks() {
-        return taskService.getAllUncompletedTask();
+    private List<Task> getUncompletedTasks(@RequestParam String userId) {
+        return taskService.getAllUncompletedTask(userId);
     }
 
     @GetMapping("/get_rating")

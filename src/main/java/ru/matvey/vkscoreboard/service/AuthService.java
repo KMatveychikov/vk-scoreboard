@@ -12,6 +12,7 @@ import ru.matvey.vkscoreboard.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -27,7 +28,7 @@ public class AuthService {
                 .email(request.getEmail())
                 .username(request.getName())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
+                .role(Role._USER)
                 .completedTasks(new ArrayList<Task>())
                 .category1Score(0)
                 .category2Score(0)
@@ -77,6 +78,7 @@ public class AuthService {
 
     public UserResponse convertUserToResponse(User user) {
         return UserResponse.builder()
+                ._id(user.get_id())
                 .category1Score(user.getCategory1Score())
                 .category2Score(user.getCategory2Score())
                 .category3Score(user.getCategory3Score())
@@ -87,5 +89,8 @@ public class AuthService {
     }
     public UserResponse getUserResponseByEmail(String email) {
       return convertUserToResponse(userRepository.findByEmail(email).orElseThrow()) ;
+    }
+    public User getUserById(String userId){
+        return userRepository.findById(userId).orElseThrow();
     }
 }

@@ -19,7 +19,6 @@ public class UserRating {
     private float category1Rating;
     private float category2Rating;
     private float category3Rating;
-
     private float overAllRating;
 
 }
